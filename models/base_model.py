@@ -13,11 +13,19 @@ class BaseModel:
     class BaseModel that defines all common attributes/methods
     for other classes
     """
-    def __init__(self, id=None, created_at=None, updated_at=None):
+    def __init__(self, *args, **kwargs):
         """ instantiation with id, created_at and updated_at"""
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = self.created_at
+        if kwargs:
+            for key, value in kwargs.items():
+                if key != "__class__":
+                    if key in ("created_at", "updated_at"):
+                        value = datetime.datetime.strptime(value, "\
+                                %Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.datetime.now()
+            self.updated_at = self.created_at
 
     def __str__(self):
         """ overriding the implementation of __str__"""
