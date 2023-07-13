@@ -2,10 +2,13 @@
 
 import unittest
 import models
+import uuid
 from datetime import datetime
 from unittest.mock import patch
 from models import base_model
 from models.base_model import BaseModel
+from io import StringIO
+import sys
 """
 Importing the unittest module to be used in validating tests
 """
@@ -191,3 +194,93 @@ class TestBaseModel(unittest.TestCase):
         # name': 'My First Model', updated_at':
         # datetime.datetime(...), 'id': '...', 'created_at':
         # datetime.datetime(...)}')
+
+    @patch("uuid.uuid4")
+    def test_BaseModel_from_dictionary_id(self, mock_uuid4):
+        """
+        Validating the implementation of  Create BaseModel from dictionary ID
+        """
+        mock_uuid4.return_value = "fixed_id"
+        my_model3 = BaseModel()
+        my_model3.name = "My_First_Model"
+        my_model3.my_number = 89
+        id_test_input = my_model3.id.__str__()
+        id_test_output = "fixed_id"
+        self.assertEqual(id_test_input, id_test_output)
+
+    @patch("uuid.uuid4")
+    @patch("datetime.datetime")
+    def test_BaseModel_from_dict_print_model(self, mock_datetime, mock_uuid4):
+        """
+        Validating the output of my_model
+        """
+
+        # fixed_id = uuid.UUID(int=0)
+        mock_uuid4.return_value = "Fixed_id"
+        mock_datetime.now.return_value = datetime(2023, 7, 12, 18, 4,
+                                                  58, 326044)
+        my_model4 = BaseModel()
+        my_model4.name = "My_First_Model"
+        my_model4.my_number = 89
+        id_result = "Fixed_id"
+        created_at_result = '2023-07-12T18:04:58.326044'
+        updated_at_result = '2023-07-12T18:04:58.326044'
+        name_result = 'My_First_Model'
+        my_number_result = 89
+
+        self.assertEqual(my_model4.id, id_result)
+        self.assertIsInstance(my_model4.id, str)
+        self.assertEqual(my_model4.created_at.isoformat(), created_at_result)
+        self.assertEqual(my_model4.updated_at.isoformat(), updated_at_result)
+        self.assertEqual(my_model4.name, name_result)
+        self.assertEqual(my_model4.my_number, my_number_result)
+
+    def test_type_created_at(self):
+        """
+        Validating the type of created_at attribute
+        """
+        my_model5 = BaseModel()
+        self.assertIsInstance(my_model5.created_at, datetime)
+
+    def test_the_key_values_my_model_json(self):
+        """
+        Validating my_model_json keys and values types
+        """
+        my_model6 = BaseModel()
+        my_model6.name = "My_First_Model"
+        my_model6.my_number = 89
+        my_model_json_1 = my_model6.to_dict()
+        self.assertIsInstance(my_model6.id, str)
+        self.assertIsInstance(my_model6.created_at, str)
+        self.assertIsInstance(my_model6.updated_at, str)
+        self.assertIsInstance(my_model6.name, str)
+        self.assertIsInstance(my_model6.my_number, int)
+        self.assertIsInstance(my_model6.__class__.__name__, str)
+
+    @patch("uuid.uuid4")
+    @patch("datetime.datetime")
+    def test_BaseModel_with_arg(self, mock_datetime, mock_uuid4):
+        """
+        Validating the output when basemodel has args
+        """
+        mock_uuid4.return_value = "no_change_id"
+        created_at = datetime(2023, 7, 12, 18, 4, 58, 326044)
+        mock_datetime.now.return_value = created_at
+        my_model7 = BaseModel()
+        my_model7.name = "My_First_Model"
+        my_model7.my_number = 89
+        my_model_json_2 = my_model7.to_dict()
+        my_model_json_2["created_at"] = created_at.strftime
+        ("%Y-%m-%dT%H:%M:%S.%f")
+        my_new_model = BaseModel(**my_model_json_2)
+        Test_id = my_new_model.id
+        self.assertEqual(Test_id, "no_change_id")
+        my_new_model_input = my_new_model.__str__()
+        my_new_model_output = "[BaseModel] (\"no_change_id\") {'id':\
+ 'no_change_id','created_at':'2023-07-12T18:04:58.326044',\
+ 'updated_at':'2023-07-12T18:04:58.326044', 'name':\
+ 'My First Model', 'my_number': 89}"
+
+        # tough bug self.assertEqual(my_new_model.created_at, datetime)
+        self.assertIsInstance(my_new_model.my_number, int)
+        self.assertFalse(my_model7 is my_new_model)
