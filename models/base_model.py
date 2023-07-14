@@ -3,7 +3,7 @@
 """
 A class BaseModel that defines all common attributes/methods for other classes:
 """
-#from models.engine.file_storage import storage # """ importing to help link BaseModel to FileStorage"""
+
 import uuid
 from models import storage
 import datetime
@@ -21,8 +21,8 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key != "__class__":
                     if key in ("created_at", "updated_at"):
-                        value = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                    storage.new(self)
+                        value = datetime.\
+                            datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
@@ -32,16 +32,22 @@ class BaseModel:
 
     def __str__(self):
         """ overriding the implementation of __str__"""
-        return ("[{}] ({}) {}".format(__class__.__name__,
-                self.id, self.__dict__))
+        """for key, value in self.__dict__.items():
+            if key == "__class__":"""
+        obj_dictionary = self.__dict__.copy()
+        obj_dictionary.pop("__class__", None)
+        obj_dictionary["created_at"] = datetime.datetime.now()
+        obj_dictionary["updated_at"] = self.created_at
 
+        return ("[{}] ({}) {}".format(__class__.__name__,
+                                      self.id, obj_dictionary))
 
     def save(self):
         """
         updates the public instance attribute updated_at with the
         current datetime
         """
-        self.updated_at = datetime.datetime.now()
+        # self.updated_at = datetime.datetime.now()
         storage.save()
 
     def to_dict(self):

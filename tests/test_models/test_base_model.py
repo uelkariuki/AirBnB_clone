@@ -270,8 +270,8 @@ class TestBaseModel(unittest.TestCase):
         my_model7.name = "My_First_Model"
         my_model7.my_number = 89
         my_model_json_2 = my_model7.to_dict()
-        #my_model_json_2["created_at"] = created_at.strptime
-        #(value,"%Y-%m-%dT%H:%M:%S.%f")
+        # my_model_json_2["created_at"] = created_at.strptime
+        # (value,"%Y-%m-%dT%H:%M:%S.%f")
         my_new_model = BaseModel(**my_model_json_2)
         Test_id = my_new_model.id
         self.assertEqual(Test_id, "no_change_id")
@@ -281,7 +281,7 @@ class TestBaseModel(unittest.TestCase):
  'updated_at':'2023-07-12T18:04:58.326044', 'name':\
  'My First Model', 'my_number': 89}"
 
-        #self.assertEqual(my_new_model.created_at, datetime)
-        #self.assertIsInstance(my_new_model.created_at, datetime)
+        # self.assertEqual(my_new_model.created_at, datetime)
+        # self.assertIsInstance(my_new_model.created_at, datetime)
         self.assertIsInstance(my_new_model.my_number, int)
         self.assertFalse(my_model7 is my_new_model)
