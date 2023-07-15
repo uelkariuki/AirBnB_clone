@@ -6,6 +6,7 @@ import uuid
 from datetime import datetime
 from unittest.mock import patch
 from models import base_model
+from models import storage
 from models.base_model import BaseModel
 from io import StringIO
 import sys
@@ -285,3 +286,23 @@ class TestBaseModel(unittest.TestCase):
         # self.assertIsInstance(my_new_model.created_at, datetime)
         self.assertIsInstance(my_new_model.my_number, int)
         self.assertFalse(my_model7 is my_new_model)
+
+    def test_BaseModel_FileStorage(self):
+        """
+        Test if objects are saved to a file using JSON format
+        and restore objects from the file
+        """
+        all_objs = storage.all()
+        self.assertIsInstance(all_objs, dict)
+        # self.assertIsInstance(storage.__file_path, str)
+        # self.assertIsInstance(storage.__objects, dict)
+        my_model8 = BaseModel()
+        my_model8.name = "My_First_Model"
+        my_model8.my_number = 89
+        my_model8.save()
+        # my_model9.reload()
+        self.assertTrue(hasattr(my_model8, "name"))
+        self.assertTrue(hasattr(my_model8, "my_number"))
+        self.assertTrue(hasattr(my_model8, "created_at"))
+        self.assertTrue(hasattr(my_model8, "updated_at"))
+        self.assertTrue(hasattr(my_model8, "id"))
