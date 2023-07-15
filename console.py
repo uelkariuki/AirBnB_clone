@@ -113,10 +113,52 @@ class HBNBCommand(cmd.Cmd):
                 list_of_objects.append(str(value))
             print(list_of_objects)
         except NameError:
-            print("**class doesn't exist **")
+            print("** class doesn't exist **")
+
+    def do_update(self, arg):
+        """Updates an instance based on class name and id by
+        updating or adding attribute"""
+        if not arg:
+            print("** class name missing **")
+            return
+        args = arg.split()
+        args_length = len(args)
+        class_name = args[0]
+        if args_length == 1:
+            print("** instance id missing **")
+            return
+        id = args[1]
+        if args_length == 2:
+            print("** attribute name missing **")
+            return
+        attr_name = args[2]
+        if args_length == 3:
+            print("** value missing **")
+            return
+        attribute = args[3]
+        try:
+            class_object = eval(class_name)
+            retrieved_dict = storage.all()
+
+            key = "{}.{}".format(class_name, id)
+            value = retrieved_dict.get(key)
+
+            if not value:
+                print("** no instance found **")
+                return
+            try:
+                attribute = int(attribute)
+            except ValueError:
+                try:
+                    attribute = float(attribute)
+                except ValueError:
+                    attribute = attribute.replace("\"", "")
+            setattr(value, attr_name, attribute)
+        except NameError:
+            print("** class doesn't exist **")
 
     def emptyline(self):
-        """An empty line + ENTER shouldn’t execute anything """
+        """An empty line + ENTER shouldn’t execute anything"""
         pass
 
     def do_quit(self, line):
