@@ -147,6 +147,7 @@ class HBNBCommand(cmd.Cmd):
             if not value:
                 print("** no instance found **")
                 return
+
             try:
                 attribute = int(attribute)
             except ValueError:
