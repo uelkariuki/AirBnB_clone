@@ -6,6 +6,7 @@ command interpreter
 """
 
 import cmd
+import re
 from models.base_model import BaseModel
 from models import storage
 """ importing cmd module """
@@ -121,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             print("** class name missing **")
             return
-        args = arg.split()
+        args = re.split(r'\s+(?=[^"]*(?:"[^"]*"[^"]*)*$)', arg)
         args_length = len(args)
         class_name = args[0]
         if args_length == 1:
