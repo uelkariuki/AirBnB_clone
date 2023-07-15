@@ -68,6 +68,53 @@ class HBNBCommand(cmd.Cmd):
         except NameError:
             print("** class doesn't exist **")
 
+    def do_destroy(self, arg):
+        """Deletes an instance based on the class name and id"""
+        if not arg:
+            print("** class name missing **")
+            return
+
+        args = arg.split()
+        cls_name = args[0]
+
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+
+        id_instance = args[1]
+        try:
+            class_object = eval(cls_name)
+            retrieved_instances = storage.all()
+
+            key = "{}.{}".format(cls_name, id_instance)
+            value = retrieved_instances.pop(key, None)
+            if not value:
+                print("** no instance found **")
+                return
+        except NameError:
+            print("** class doesn't exist **")
+
+    def do_all(self, arg):
+        """
+        Prints all string representation of all instances
+        based or not on the class name
+        """
+        args = arg.split()
+        if len(args) >= 1:
+            cls_name = args[0]
+        else:
+            cls_name = "BaseModel"
+
+        list_of_objects = []
+        try:
+            class_object = eval(cls_name)
+            retrieved_instances = storage.all()
+            for key, value in retrieved_instances.items():
+                list_of_objects.append(str(value))
+            print(list_of_objects)
+        except NameError:
+            print("**class doesn't exist **")
+
     def emptyline(self):
         """An empty line + ENTER shouldn’t execute anything """
         pass
