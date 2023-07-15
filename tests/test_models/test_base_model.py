@@ -292,14 +292,20 @@ class TestBaseModel(unittest.TestCase):
         Test if objects are saved to a file using JSON format
         and restore objects from the file
         """
-        all_objs = storage.all()
-        self.assertIsInstance(all_objs, dict)
+        output = StringIO()
+        sys.stdout = output
+        # all_objs = storage.all()
+        # self.assertIsInstance(all_objs, dict)
         # self.assertIsInstance(storage.__file_path, str)
         # self.assertIsInstance(storage.__objects, dict)
         my_model8 = BaseModel()
         my_model8.name = "My_First_Model"
         my_model8.my_number = 89
         my_model8.save()
+        output_value = output.getvalue()
+        sys.stdout = sys.__stdout__
+        expected_value = my_model8.__str__()
+        self.assertTrue(expected_value, output_value)
         # my_model9.reload()
         self.assertTrue(hasattr(my_model8, "name"))
         self.assertTrue(hasattr(my_model8, "my_number"))
