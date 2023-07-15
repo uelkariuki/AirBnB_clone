@@ -36,8 +36,8 @@ class BaseModel:
             if key == "__class__":"""
         obj_dictionary = self.__dict__.copy()
         obj_dictionary.pop("__class__", None)
-        obj_dictionary["created_at"] = datetime.datetime.now()
-        obj_dictionary["updated_at"] = self.created_at
+        obj_dictionary["created_at"] = self.created_at
+        obj_dictionary["updated_at"] = self.updated_at
 
         return ("[{}] ({}) {}".format(__class__.__name__,
                                       self.id, obj_dictionary))
@@ -55,7 +55,7 @@ class BaseModel:
         returns a dictionary containing all keys/values of __dict__
         of the instance
         """
-        dict_result = self.__dict__
+        dict_result = self.__dict__.copy()
         dict_result["__class__"] = __class__.__name__
 
         dict_result["created_at"] = self.created_at.isoformat()

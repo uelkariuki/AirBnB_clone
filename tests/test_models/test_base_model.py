@@ -251,8 +251,8 @@ class TestBaseModel(unittest.TestCase):
         my_model6.my_number = 89
         my_model_json_1 = my_model6.to_dict()
         self.assertIsInstance(my_model6.id, str)
-        self.assertIsInstance(my_model6.created_at, str)
-        self.assertIsInstance(my_model6.updated_at, str)
+        self.assertIsInstance(my_model6.created_at, datetime)
+        self.assertIsInstance(my_model6.updated_at, datetime)
         self.assertIsInstance(my_model6.name, str)
         self.assertIsInstance(my_model6.my_number, int)
         self.assertIsInstance(my_model6.__class__.__name__, str)
