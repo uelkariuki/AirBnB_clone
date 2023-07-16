@@ -44,6 +44,10 @@ class HBNBCommand(cmd.Cmd):
 
                 self.do_show(f"{the_class_name} {id_segment}")
 
+            elif method.startswith("destroy(") and method.endswith(")"):
+                destroy_id_segment = method[8:-1]
+                self.do_destroy(f"{the_class_name} {destroy_id_segment}")
+
             return
 
     def do_create(self, arg):
@@ -108,14 +112,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        args = arg.split()
+        args = re.split(r'\s+(?=[^"]*(?:"[^"]*"[^"]*)*$)', arg)
         cls_name = args[0]
 
         if len(args) < 2:
             print("** instance id missing **")
             return
 
-        id_instance = args[1]
+        id_instance = args[1].strip("\"")
         try:
             class_object = eval(cls_name)
             retrieved_instances = storage.all()
