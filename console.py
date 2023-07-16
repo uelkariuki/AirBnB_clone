@@ -38,6 +38,12 @@ class HBNBCommand(cmd.Cmd):
             elif method == "count()":
                 self.do_count(the_class_name)
 
+            elif method.startswith("show(") and method.endswith(")"):
+                # slicing: starts at index 5 inclusive & end at -1 exclusive
+                id_segment = method[5:-1]
+
+                self.do_show(f"{the_class_name} {id_segment}")
+
             return
 
     def do_create(self, arg):
@@ -69,13 +75,16 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        args = arg.split()
+        args = re.split(r'\s+(?=[^"]*(?:"[^"]*"[^"]*)*$)', arg)
+
         cls_name = args[0]
 
         if len(args) < 2:
             print("** instance id missing **")
             return
-        id_instance = args[1]
+        # remove the "" before "4545-..." to be interpreted as 4545...
+        # without the quotation marks
+        id_instance = args[1].strip("\"")
 
         try:
             class_object = eval(cls_name)
