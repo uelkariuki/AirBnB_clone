@@ -17,8 +17,13 @@ Each task is linked and will help you to:
 
 Do you remember the Shell? It’s exactly the same but limited to a specific use-case. In our case, we want to be able to manage the objects of our project:
 
-- Create a new object (ex: a new User or a new Place) 
+- Create a new object (ex: a new User or a new Place)
 - Retrieve an object from a file, a database etc…
 - Do operations on objects (count, compute stats, etc…)
 - Update attributes of an object
-- Destroy an object  
+- Destroy an object
+
+
+1. Write beautiful code that passes the pycodestyle checks
+2. All your files, classes, functions must be tested with unit tests, Unit tests must also pass in non-interactive mode:
+3. Write a class BaseModel that defines all common attributes/methods for other classes
