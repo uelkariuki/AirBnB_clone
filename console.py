@@ -47,6 +47,14 @@ class HBNBCommand(cmd.Cmd):
             elif method.startswith("destroy(") and method.endswith(")"):
                 destroy_id_segment = method[8:-1]
                 self.do_destroy(f"{the_class_name} {destroy_id_segment}")
+            elif method.startswith("update(") and method.endswith(")"):
+                args_before_split = method[7:-1].split(", ")
+
+                # removing the double quotation marks
+                new_args = [arg.strip("\"") for arg in args_before_split]
+                if len(new_args) == 3:
+                    self.do_update(f"{the_class_name} {new_args[0]}\
+                            {new_args[1]} {new_args[2]}")
 
             return
 
@@ -175,7 +183,8 @@ class HBNBCommand(cmd.Cmd):
         if args_length == 3:
             print("** value missing **")
             return
-        attribute = args[3]
+        # attribute = args[3].strip("\"")
+        attribute = " ".join(args[3:]).strip("\"")
         try:
             class_object = eval(class_name)
             retrieved_dict = storage.all()
@@ -192,8 +201,10 @@ class HBNBCommand(cmd.Cmd):
                 try:
                     attribute = float(attribute)
                 except ValueError:
-                    attribute = attribute.replace("\"", "")
+                    # attribute = attribute.replace("\"", "")
+                    pass
             setattr(value, attr_name, attribute)
+            value.save()
         except NameError:
             print("** class doesn't exist **")
 
