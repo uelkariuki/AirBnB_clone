@@ -18,13 +18,13 @@ class User(BaseModel):
     last_name = ""
 
     def __init__(self, *args, **kwargs):
-        """ init method """
+        """init method """
         super().__init__(*args, **kwargs)
 
     def __str__(self):
-        """ overriding the implementation of __str__"""
-        """for key, value in self.__dict__.items():
-            if key == "__class__":"""
+        """overriding the implementation of __str__
+        for key, value in self.__dict__.items():
+        if key == "__class__":"""
 
         # super().__str__()
         obj_dictionary = self.__dict__.copy()
@@ -35,10 +35,10 @@ class User(BaseModel):
                                       self.id, obj_dictionary))
 
     def to_dict(self):
-        """
-        returns a dictionary containing all keys/values of __dict__
-        of the instance
-        """
+
+        """returns a dictionary containing all keys/values of __dict__
+        of the instance"""
+
         # super().to_dict()
         dict_result = self.__dict__.copy()
         dict_result["__class__"] = __class__.__name__

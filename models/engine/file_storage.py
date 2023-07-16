@@ -62,5 +62,26 @@ class FileStorage:
                         from models.user import User
                         obj = User(**obj_dict)
                         self.new(obj)
+
+                    if class_name == "Place":
+                        from models.place import Place
+                        obj = Place(**obj_dict)
+                        self.new(obj)
+
+                    if class_name == "City":
+                        from models.city import City
+                        obj = City(**obj_dict)
+                        self.new(obj)
+
+                    if class_name == "Amenity":
+                        from models.amenity import Amenity
+                        obj = Amenity(**obj_dict)
+                        self.new(obj)
+
+                    if class_name == "Review":
+                        from models.review import Review
+                        obj = Review(**obj_dict)
+                        self.new(obj)
+
         else:
             pass
