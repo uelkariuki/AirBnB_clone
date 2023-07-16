@@ -47,6 +47,20 @@ class HBNBCommand(cmd.Cmd):
             elif method.startswith("destroy(") and method.endswith(")"):
                 destroy_id_segment = method[8:-1]
                 self.do_destroy(f"{the_class_name} {destroy_id_segment}")
+
+            elif method.startswith("update(") and method.endswith("})"):
+                args = method[7:-1].split(", ", 1)
+                try:
+                    arg_dict = eval(args[1])
+                    if type(arg_dict) == dict:
+                        id = args[0].strip("\"")
+                        for key, value in arg_dict.items():
+                            key = key.strip("\"")
+                            self.do_update(f"{the_class_name} {id} \
+                                    {key} {value}")
+                except TypeError:
+                    pass
+
             elif method.startswith("update(") and method.endswith(")"):
                 args_before_split = method[7:-1].split(", ")
 
