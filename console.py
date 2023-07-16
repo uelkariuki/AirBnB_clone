@@ -21,6 +21,7 @@ from models import storage
 class HBNBCommand(cmd.Cmd):
     """ class for the command interpreter """
     prompt = "(hbnb) "
+    count = 0
 
     def default(self, line):
         """ overiding the default way that cmd handles args"""
@@ -33,7 +34,11 @@ class HBNBCommand(cmd.Cmd):
                 if the_class_name in ["BaseModel", "User", "Place",
                                       "State", "City", "Amenity", "Review"]:
                     self.do_all(the_class_name)
-                    return
+
+            elif method == "count()":
+                self.do_count(the_class_name)
+
+            return
 
     def do_create(self, arg):
         """
@@ -176,6 +181,25 @@ class HBNBCommand(cmd.Cmd):
                 except ValueError:
                     attribute = attribute.replace("\"", "")
             setattr(value, attr_name, attribute)
+        except NameError:
+            print("** class doesn't exist **")
+
+    def do_count(self, arg):
+        """ retrieve the number of instances of a class:<class name>.count()
+        """
+        args = arg.split()
+        if len(args) < 1:
+            return
+
+        cls_name = args[0]
+
+        try:
+            class_object = eval(cls_name)
+            retrieved_instances = storage.all(class_object)
+
+            number_of_instances = len(retrieved_instances)
+            print(number_of_instances)
+
         except NameError:
             print("** class doesn't exist **")
 
