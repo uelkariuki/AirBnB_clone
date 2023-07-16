@@ -312,3 +312,28 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(my_model8, "created_at"))
         self.assertTrue(hasattr(my_model8, "updated_at"))
         self.assertTrue(hasattr(my_model8, "id"))
+
+    def test_obj_not_empty(self):
+        """Asserting that obj is not empty"""
+        all_objects = storage.all()
+        self.assertGreater(len(all_objects), 0)
+
+    def test_attributes_using_save(self):
+        """ validate the attributes after save method is called"""
+        All_objects = storage.all()
+        my_model10 = BaseModel()
+        my_model10.name = "My_First_Model"
+        my_model10.my_number = 89
+        my_model10.save()
+        self.assertEqual(my_model10.name, "My_First_Model")
+        self.assertEqual(my_model10.my_number, 89)
+
+    def test_unique_id_with_save(self):
+        """ Validate that the ids are unique """
+        my_model11 = BaseModel()
+        my_model12 = BaseModel()
+
+        my_model11.save()
+        my_model12.save()
+
+        self.assertNotEqual(my_model11.id, my_model12.id)
