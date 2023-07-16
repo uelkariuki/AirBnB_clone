@@ -26,6 +26,7 @@ class User(BaseModel):
         """for key, value in self.__dict__.items():
             if key == "__class__":"""
 
+        # super().__str__()
         obj_dictionary = self.__dict__.copy()
         obj_dictionary.pop("__class__", None)
         obj_dictionary["created_at"] = self.created_at
@@ -38,9 +39,11 @@ class User(BaseModel):
         returns a dictionary containing all keys/values of __dict__
         of the instance
         """
+        # super().to_dict()
         dict_result = self.__dict__.copy()
         dict_result["__class__"] = __class__.__name__
 
         dict_result["created_at"] = self.created_at.isoformat()
         dict_result["updated_at"] = self.updated_at.isoformat()
+
         return dict_result
