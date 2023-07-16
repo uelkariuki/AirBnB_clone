@@ -2,7 +2,6 @@
 
 import json
 import os
-
 """ importing the json module"""
 
 """
@@ -57,6 +56,11 @@ class FileStorage:
                     if class_name == "BaseModel":
                         from models.base_model import BaseModel
                         obj = BaseModel(**obj_dict)
+                        self.new(obj)
+
+                    if class_name == "User":
+                        from models.user import User
+                        obj = User(**obj_dict)
                         self.new(obj)
         else:
             pass
