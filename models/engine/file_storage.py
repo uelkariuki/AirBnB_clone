@@ -2,7 +2,6 @@
 
 import json
 import os
-
 """ importing the json module"""
 
 """
@@ -17,9 +16,13 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
+    def all(self, the_class=None):
         """ public instance methods that returns the dictionary __objects"""
-        return self.__objects
+        if the_class is None:
+            return self.__objects
+        else:
+            return {key: value for key, value in
+                    self.__objects.items() if isinstance(value, the_class)}
 
     def new(self, obj):
         """ public instance methods that sets in __objects the
@@ -58,5 +61,31 @@ class FileStorage:
                         from models.base_model import BaseModel
                         obj = BaseModel(**obj_dict)
                         self.new(obj)
+
+                    if class_name == "User":
+                        from models.user import User
+                        obj = User(**obj_dict)
+                        self.new(obj)
+
+                    if class_name == "Place":
+                        from models.place import Place
+                        obj = Place(**obj_dict)
+                        self.new(obj)
+
+                    if class_name == "City":
+                        from models.city import City
+                        obj = City(**obj_dict)
+                        self.new(obj)
+
+                    if class_name == "Amenity":
+                        from models.amenity import Amenity
+                        obj = Amenity(**obj_dict)
+                        self.new(obj)
+
+                    if class_name == "Review":
+                        from models.review import Review
+                        obj = Review(**obj_dict)
+                        self.new(obj)
+
         else:
             pass
