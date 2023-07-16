@@ -22,6 +22,19 @@ class HBNBCommand(cmd.Cmd):
     """ class for the command interpreter """
     prompt = "(hbnb) "
 
+    def default(self, line):
+        """ overiding the default way that cmd handles args"""
+        if "." in line:
+            # max split=1 means split on encountering the
+            # first occurence of "."
+            the_class_name, method = line.split(".", 1)
+            if method == "all()":
+                the_class_name = the_class_name.strip()
+                if the_class_name in ["BaseModel", "User", "Place",
+                                      "State", "City", "Amenity", "Review"]:
+                    self.do_all(the_class_name)
+                    return
+
     def do_create(self, arg):
         """
         Command that Creates a new instance of BaseModel, saves
@@ -115,10 +128,12 @@ class HBNBCommand(cmd.Cmd):
         list_of_objects = []
         try:
             class_object = eval(cls_name)
-            retrieved_instances = storage.all()
-            for key, value in retrieved_instances.items():
-                list_of_objects.append(str(value))
-            print(list_of_objects)
+            retrieved_instances = storage.all(class_object)
+            # for key, value in retrieved_instances.items():
+            # list_of_objects.append(str(value))
+            # print(list_of_objects)
+            print([str(value) for value in retrieved_instances.values()])
+
         except NameError:
             print("** class doesn't exist **")
 

@@ -16,9 +16,13 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
+    def all(self, the_class=None):
         """ public instance methods that returns the dictionary __objects"""
-        return self.__objects
+        if the_class is None:
+            return self.__objects
+        else:
+            return {key: value for key, value in
+                    self.__objects.items() if isinstance(value, the_class)}
 
     def new(self, obj):
         """ public instance methods that sets in __objects the
