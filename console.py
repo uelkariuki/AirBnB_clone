@@ -47,6 +47,7 @@ class HBNBCommand(cmd.Cmd):
             elif method.startswith("destroy(") and method.endswith(")"):
                 destroy_id_segment = method[8:-1]
                 self.do_destroy(f"{the_class_name} {destroy_id_segment}")
+<<<<<<< HEAD
             elif method.startswith("update(") and method.endswith("})"):
                 args = method[7:-1].split(", ", 1)
                 try:
@@ -63,10 +64,20 @@ class HBNBCommand(cmd.Cmd):
             elif method.startswith("update(") and method.endswith(")"):
                 args_before_split = method[7:-1].split(", ")
 
+=======
+            elif method.startswith("update(") and method.endswith(")"):
+                args_before_split = method[7:-1].split(", ")
+
+                # removing the double quotation marks
+>>>>>>> c2ead20f5b16de32fe3a91fdd397a9f1906a1900
                 new_args = [arg.strip("\"") for arg in args_before_split]
                 if len(new_args) == 3:
                     self.do_update(f"{the_class_name} {new_args[0]}\
                             {new_args[1]} {new_args[2]}")
+<<<<<<< HEAD
+=======
+
+>>>>>>> c2ead20f5b16de32fe3a91fdd397a9f1906a1900
             return
 
     def do_create(self, arg):
