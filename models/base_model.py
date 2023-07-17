@@ -39,7 +39,7 @@ class BaseModel:
         obj_dictionary["created_at"] = self.created_at
         obj_dictionary["updated_at"] = self.updated_at
 
-        return ("[{}] ({}) {}".format(__class__.__name__,
+        return ("[{}] ({}) {}".format(self.__class__.__name__,
                                       self.id, obj_dictionary))
 
     def save(self):
@@ -56,7 +56,7 @@ class BaseModel:
         of the instance
         """
         dict_result = self.__dict__.copy()
-        dict_result["__class__"] = __class__.__name__
+        dict_result["__class__"] = self.__class__.__name__
 
         dict_result["created_at"] = self.created_at.isoformat()
         dict_result["updated_at"] = self.updated_at.isoformat()

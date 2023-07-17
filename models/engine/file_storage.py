@@ -57,6 +57,7 @@ class FileStorage:
 
                 for key, obj_dict in json_data.items():
                     class_name, obj_id = key.split(".")
+
                     if class_name == "BaseModel":
                         from models.base_model import BaseModel
                         obj = BaseModel(**obj_dict)
