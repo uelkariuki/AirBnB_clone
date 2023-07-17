@@ -172,30 +172,28 @@ class TestHBNBCommand(unittest.TestCase):
             self.assertGreater(len(output11), 0)
 
     def test_more_show_command(self):
-          """ Testing the console show command"""
-          with patch('sys.stdout', new=StringIO()) as f:
-              HBNBCommand().onecmd("create BaseModel")
-              output12 = f.getvalue()
+        """ Testing the console show command"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create BaseModel")
+            output12 = f.getvalue()
 
-              the_id2 = output12.strip()
+            the_id2 = output12.strip()
 
-          with patch('sys.stdout', new=StringIO()) as f:
-              HBNBCommand().onecmd(f"show BaseModel {the_id2}")
-              output12 = f.getvalue()
- 
-          self.assertIn("BaseModel", output12)
-          self.assertIn(the_id2, output12)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"show BaseModel {the_id2}")
+            output12 = f.getvalue()
+
+            self.assertIn("BaseModel", output12)
+            self.assertIn(the_id2, output12)
 
     def test_all_command(self):
-          """ Testing the console all command"""
-          with patch('sys.stdout', new=StringIO()) as f:
-              HBNBCommand().onecmd("create BaseModel")
-              output13 = f.getvalue()
- 
-          with patch('sys.stdout', new=StringIO()) as f:
-              HBNBCommand().onecmd(f"all BaseModel")
-              output13 = f.getvalue()
+        """ Testing the console all command"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create BaseModel")
+            output13 = f.getvalue()
 
-              self.assertIn("User", output13)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(f"all BaseModel")
+            output13 = f.getvalue()
 
-
+            self.assertIn("User", output13)
