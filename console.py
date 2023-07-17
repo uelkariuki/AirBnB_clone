@@ -148,11 +148,11 @@ class HBNBCommand(cmd.Cmd):
 
             key = "{}.{}".format(cls_name, id_instance)
             value = retrieved_instances.pop(key, None)
-            value.save()
 
             if not value:
                 print("** no instance found **")
                 return
+            value.save()
         except NameError:
             print("** class doesn't exist **")
 
