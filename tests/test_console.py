@@ -17,7 +17,7 @@ from models.review import Review
 from io import StringIO
 import sys
 """
-Importing the unittest module to be used in validating tests
+Importing the unittest module to be used in validating Unittests
 """
 
 """
@@ -27,7 +27,7 @@ Unit testing for console.py, all features!
 
 class TestHBNBCommand(unittest.TestCase):
     """
-    class to validate tests to be done on the console
+    class to validate Unittests to be done on the console
     """
 
     def test_documentation_module(self):
