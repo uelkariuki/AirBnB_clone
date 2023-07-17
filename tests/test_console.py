@@ -190,12 +190,12 @@ class TestHBNBCommand(unittest.TestCase):
           """ Testing the console all command"""
           with patch('sys.stdout', new=StringIO()) as f:
               HBNBCommand().onecmd("create BaseModel")
-              output = f.getvalue()
+              output13 = f.getvalue()
  
           with patch('sys.stdout', new=StringIO()) as f:
               HBNBCommand().onecmd(f"all BaseModel")
-              output = f.getvalue()
+              output13 = f.getvalue()
 
-              self.assertIn("User", output)
+              self.assertIn("User", output13)
 
 
