@@ -173,7 +173,7 @@ class HBNBCommand(cmd.Cmd):
                 list_of_objects.append(str(value))
             if list_of_objects:
                 print(list_of_objects)
-            #print([str(value) for value in retrieved_instances.values()])
+            # print([str(value) for value in retrieved_instances.values()])
 
         except NameError:
             print("** class doesn't exist **")
