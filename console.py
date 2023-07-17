@@ -151,6 +151,7 @@ class HBNBCommand(cmd.Cmd):
             if not value:
                 print("** no instance found **")
                 return
+            storage.save()
         except NameError:
             print("** class doesn't exist **")
 
