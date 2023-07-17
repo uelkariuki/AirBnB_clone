@@ -169,10 +169,11 @@ class HBNBCommand(cmd.Cmd):
         try:
             class_object = eval(cls_name)
             retrieved_instances = storage.all(class_object)
-            # for key, value in retrieved_instances.items():
-            # list_of_objects.append(str(value))
-            # print(list_of_objects)
-            print([str(value) for value in retrieved_instances.values()])
+            for value in retrieved_instances.values():
+                list_of_objects.append(str(value))
+            if list_of_objects:
+                print(list_of_objects)
+            #print([str(value) for value in retrieved_instances.values()])
 
         except NameError:
             print("** class doesn't exist **")
