@@ -13,18 +13,20 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from io import StringIO
 import sys
+import json
+import os
 """
 Importing the unittest module to be used in validating tests
 """
 
 """
-Unit testing for class FileStorage from models/__init__.py file
+Unit testing for class FileStorage
 """
 
 
-class TestInit(unittest.TestCase):
+class TestFileStorage(unittest.TestCase):
     """
-    class to validate unittests to be done on the models/__init__.py
+    class to validate unittests to be done on the FileStorage class
     """
 
     def test_create_FileStorage_instance_and_attributes(self):

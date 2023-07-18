@@ -182,19 +182,16 @@ class TestBaseModel(unittest.TestCase):
         Validating the overwritten string representation __str__
         works
         """
-        str_testing = BaseModel()
-        self.assertIsInstance(str_testing, BaseModel)
+        str_test = BaseModel()
+        self.assertIsInstance(str_test, BaseModel)
 
-        str_testing.name = "My First Model"
-        self.assertTrue(hasattr(str_testing, "name"))
-        str_testing.my_number = 89
-        self.assertTrue(hasattr(str_testing, "my_number"))
+        str_test.name = "My First Model"
+        self.assertTrue(hasattr(str_test, "name"))
+        str_test.my_number = 89
+        self.assertTrue(hasattr(str_test, "my_number"))
 
-        # self.assertEqual(str_testing.__str__(),\
-        # '[BaseModel] (...) {''my_number': 89,\
-        # name': 'My First Model', updated_at':
-        # datetime.datetime(...), 'id': '...', 'created_at':
-        # datetime.datetime(...)}')
+        expected = (f"[BaseModel] ({str_test.id}) {str_test.__dict__}")
+        self.assertEqual(str(str_test), expected)
 
     @patch("uuid.uuid4")
     def test_BaseModel_from_dictionary_id(self, mock_uuid4):
@@ -332,8 +329,9 @@ class TestBaseModel(unittest.TestCase):
         """ Validate that the ids are unique """
         my_model11 = BaseModel()
         my_model12 = BaseModel()
-
+        old_updated_at = my_model11.updated_at
         my_model11.save()
         my_model12.save()
 
         self.assertNotEqual(my_model11.id, my_model12.id)
+        self.assertEqual(my_model11.updated_at, old_updated_at)
