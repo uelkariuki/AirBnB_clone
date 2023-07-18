@@ -333,7 +333,6 @@ class TestBaseModel(unittest.TestCase):
         my_model11.save()
         my_model12.save()
 
-        # self.assertNotEqual(my_model11.id, my_model12.id)
-        # self.assertEqual(my_model11.updated_at, old_updated_at)
-
-        pass
+        self.assertNotEqual(my_model11.id, my_model12.id)
+        self.assertEqual(my_model11.updated_at, old_updated_at)
+        self.assertTrue(hasattr(my_model11, "created_at"))
