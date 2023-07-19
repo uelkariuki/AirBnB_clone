@@ -1,5 +1,6 @@
 # 0x00. AirBnB clone - The console
-## Welcome to the AirBnB clone project!
+## Background Context
+### Welcome to the AirBnB clone project!
 
 **First step: Write a command interpreter to manage your AirBnB objects.**
 
@@ -23,7 +24,48 @@ Do you remember the Shell? It’s exactly the same but limited to a specific use
 - Update attributes of an object
 - Destroy an object
 
+**More Info**
 
-1. Write beautiful code that passes the pycodestyle checks
-2. All your files, classes, functions must be tested with unit tests, Unit tests must also pass in non-interactive mode:
-3. Write a class BaseModel that defines all common attributes/methods for other classes
+**Execution**
+
+Your shell should work like this in interactive mode:
+
+``` shell
+$ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb)
+(hbnb)
+(hbnb) quit
+$
+```
+
+But also in non-interactive mode: (like the Shell project in C)
+
+``` shell
+$ echo "help" | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb)
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb)
+$
+```
+
+All tests should also pass in non-interactive mode: `$ echo "python3 -m unittest discover tests" | bash`
