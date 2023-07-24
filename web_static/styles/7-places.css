@@ -1,0 +1,48 @@
+.places{
+	display: inline-block;
+	
+	margin-top: 20px;
+	justify-content: center;
+	color:black;
+	
+	
+	
+}
+.section_title{
+	font-size: 30px;
+	margin: 0;
+	color:black;
+	margin-right: 40%;
+	display: inline-block;
+	text-align: left;
+	
+}
+
+.place_article1,
+.place_article2,
+.place_article3{
+	width: 390px;
+	padding: 0px;
+	margin: 20px;
+	border: 1px solid #FF5A5F;
+	border-radius: 4px;
+	color: black;
+	display: inline-block;
+	text-align: center;
+	margin-left: 4%;
+}
+
+.place_article h2{
+	font-size: 30px;
+	
+	color:black;
+	
+	
+}
+
+.place_article3{
+	margin-left: 25%;
+	
+	
+	
+}
