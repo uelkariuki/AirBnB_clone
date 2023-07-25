@@ -166,3 +166,77 @@
 .place_article2 .description{
 	margin-bottom: 20px;
 }
+
+ .New-Amenities{
+	margin-top: 40px;
+	text-align: left;
+	font-size: 15px;
+	display: grid;
+	
+}
+.New-Amenities h2{
+	font-size: 16px;
+	border-bottom: 1px solid #DDDDDD;
+	margin-bottom: 0;
+
+
+}
+.New-Amenities ul{
+	list-style: none;
+	padding: 0px;
+	
+	
+}
+.New-Amenities-list li::before{
+	content: "";
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	background-size: contain;
+	
+	
+}
+.New-Amenities-list li.pet:before{
+	background-image: url("../images/icon_pets.png");
+	background-repeat: no-repeat;
+	margin-right: 11px;
+	vertical-align: middle;
+	
+	
+}
+
+.New-Amenities-list li.tv:before{
+	background-image: url("../images/icon_tv.png");
+	background-repeat: no-repeat;
+	margin-right: 11px;
+	vertical-align: middle;
+}
+.New-Amenities-list li.wifi:before{
+	background-image: url("../images/icon_wifi.png");
+	background-repeat: no-repeat;
+	margin-right: 11px;
+	vertical-align: middle;
+}
+.reviews{
+	margin-top: 40px;
+	text-align: left;
+	
+}
+
+
+.reviews h2{
+	font-size: 16px;
+	border-bottom: 1px solid #DDDDDD;
+	width: 390px;
+}
+.list-review ul{
+	list-style: none;
+	padding: 0px;
+}
+.list-review h3{
+	font-size: 14px;
+}
+.list-review p{
+	font-size: 14px;
+	font-style: normal;
+}
